@@ -1,0 +1,26 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-08-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "subscriptionPrefix": {
+            "type": "string",
+            "metadata": {
+                "description": "The prefix to be added to the subscription name."
+            }
+        }
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Resources/resourceGroups",
+            "apiVersion": "2020-06-01",
+            "name": "[concat(parameters('subscriptionPrefix'), '-', subscription().displayName, '-vm-rg')]",
+            "location": "[resourceGroup().location]"
+        }
+    ],
+    "outputs": {
+        "resourceGroupName": {
+            "type": "string",
+            "value": "[concat(parameters('subscriptionPrefix'), '-', subscription().displayName, '-vm-rg')]"
+        }
+    }
+}
